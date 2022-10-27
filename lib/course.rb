@@ -2,7 +2,8 @@ require 'pry'
 
 class Course
   attr_reader :name,
-              :capacity
+              :capacity,
+              :students
 
   def initialize(name, capacity)
     @name = name 
@@ -10,6 +11,16 @@ class Course
     @students = []
   end
 
-  def enroll
+  def full?
+    if @students.size == capacity
+      return true
+    else
+      return false
+    end
+  end
+
+  def enroll(student)
+    @students << student
+  end
 
 end
