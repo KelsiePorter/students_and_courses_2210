@@ -3,42 +3,24 @@ require './lib/course'
 require './lib/gradebook'
 
 RSpec.describe Gradebook do 
-
   it 'gradebook as an instructor' do 
     gradebook = Gradebook.new("Kelly Karg")
 
     expect(gradebook.instructor).to eq("Kelly Karg")
   end
 
-  it 'gradebook has courses' do 
+  it 'gradebook has no courses by default' do 
     gradebook = Gradebook.new("Kelly Karg")
     course1 = Course.new("Calculus", 2)
     course2 = Course.new("Science", 3)
 
     expect(gradebook.courses).to eq([])
-
-    gradebook.add_course(course1)
-    gradebook.add_course(course2)
-
-    expect(gradebook.courses).to eq([course1, course2])
   end
 
   it 'gradebook can add courses' do 
     gradebook = Gradebook.new("Kelly Karg")
     course1 = Course.new("Calculus", 2)
     course2 = Course.new("Science", 3)
-    student1 = Student.new({name: "Morgan", age: 21})
-    student2 = Student.new({name: "Jordan", age: 29}) 
-    student3 = Student.new({name: "Bodi", age: 33})
-    student4 = Student.new({name: "Dean", age: 32})
-
-    course1.enroll(student1)
-    course1.enroll(student2)
-    course2.enroll(student3)
-    course2.enroll(student4)
-
-    expect(course1.students).to eq([student1, student2])
-    expect(course2.students).to eq([student3, student4])
 
     gradebook.add_course(course1)
     gradebook.add_course(course2)
@@ -54,6 +36,7 @@ RSpec.describe Gradebook do
     student2 = Student.new({name: "Jordan", age: 29}) 
     student3 = Student.new({name: "Bodi", age: 33})
     student4 = Student.new({name: "Dean", age: 32})
+    student5 = Student.new({name: "Karl", age: 84})
 
     course1.enroll(student1)
     course1.enroll(student2)
@@ -66,7 +49,7 @@ RSpec.describe Gradebook do
     expect(gradebook.all_students).to eq([student1, student2, student3, student4])
   end
 
-  it 'gradebook can return students with a score below 80' do 
+  it 'gradebook can return students with a score below a threshold' do 
     gradebook = Gradebook.new("Kelly Karg")
     course1 = Course.new("Calculus", 2)
     course2 = Course.new("Science", 3)
@@ -93,9 +76,11 @@ RSpec.describe Gradebook do
     gradebook.add_course(course2)
 
     expect(gradebook.students_score_below(80)).to eq([student2, student4])
+    expect(gradebook.students_score_below(70)).to eq([student4])
+
   end
 
-  it 'gradebook can track all grades across all course' do 
+  it 'gradebook can track all grades across all courses' do 
     gradebook = Gradebook.new("Kelly Karg")
     course1 = Course.new("Calculus", 2)
     course2 = Course.new("Science", 3)
@@ -144,6 +129,11 @@ RSpec.describe Gradebook do
 
     gradebook.add_course(course1)
     gradebook.add_course(course2) 
+
+    expect(student1.grade).to eq(95)
+    expect(student2.grade).to eq(78)
+    expect(student3.grade).to eq(80)
+    expect(student4.grade).to eq(80)
 
     expect(gradebook.grade_range(75, 85)).to eq([student2, student3, student4])
     expect(gradebook.grade_range(86, 100)).to eq([student1])

@@ -1,5 +1,3 @@
-require 'pry'
-
 class Course
   attr_reader :name,
               :capacity,
@@ -22,5 +20,4 @@ class Course
   def enroll(student)
     @students << student
   end
-
 end

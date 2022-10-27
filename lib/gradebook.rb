@@ -1,5 +1,3 @@
-require 'pry'
-
 class Gradebook 
   attr_reader :instructor,
               :courses
@@ -21,10 +19,10 @@ class Gradebook
   end
 
   def students_score_below(threshold)
-    students_below_80 = all_students.select do |student|
+    students = all_students.select do |student|
       student.grade < threshold
     end
-    students_below_80
+    students
   end
 
   def all_grades 
@@ -34,9 +32,9 @@ class Gradebook
   end
 
   def grade_range(lower, upper)
-    grade_range = all_students.select do |student|
+    students = all_students.select do |student|
       student.grade.between?(lower, upper) 
     end
-    grade_range
+    students
   end
 end

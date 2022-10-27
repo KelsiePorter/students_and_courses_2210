@@ -18,5 +18,4 @@ class Student
   def grade 
     @scores.sum / @scores.size
   end
-
 end

@@ -2,7 +2,6 @@ require './lib/student'
 require './lib/course'
 
 RSpec.describe Course do 
-
   it 'course has a name and a capacity' do 
     course = Course.new("Calculus", 2)
 
