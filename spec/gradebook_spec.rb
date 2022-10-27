@@ -92,7 +92,7 @@ RSpec.describe Gradebook do
     gradebook.add_course(course1)
     gradebook.add_course(course2)
 
-    expect(gradebook.students_score_below_80).to eq([student2, student4])
+    expect(gradebook.students_score_below(80)).to eq([student2, student4])
   end
 
   it 'gradebook can track all grades across all course' do 
@@ -105,6 +105,8 @@ RSpec.describe Gradebook do
     student4 = Student.new({name: "Dean", age: 32})
 
     student1.log_score(92)
+    student1.log_score(92)
+
     student2.log_score(78)
     student3.log_score(80)
     student4.log_score(65)

@@ -22,9 +22,9 @@ class Gradebook
     students.flatten!
   end
 
-  def students_score_below_80
+  def students_score_below(threshold)
     students_below_80 = all_students.select do |student|
-      student.grade < 80.0
+      student.grade < threshold
     end
     students_below_80
   end
