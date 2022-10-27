@@ -11,6 +11,8 @@ class Gradebook
     @all_students = []
   end
 
-  
+  def add_course(course)
+    @courses << course
+  end  
 
 end
