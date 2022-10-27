@@ -106,7 +106,6 @@ RSpec.describe Gradebook do
 
     student1.log_score(92)
     student1.log_score(92)
-
     student2.log_score(78)
     student3.log_score(80)
     student4.log_score(65)
@@ -132,9 +131,11 @@ RSpec.describe Gradebook do
     student4 = Student.new({name: "Dean", age: 32})
 
     student1.log_score(92)
+    student1.log_score(98)
     student2.log_score(78)
     student3.log_score(80)
     student4.log_score(65)
+    student4.log_score(95)
 
     course1.enroll(student1)
     course1.enroll(student2)
@@ -144,8 +145,8 @@ RSpec.describe Gradebook do
     gradebook.add_course(course1)
     gradebook.add_course(course2) 
 
-    expect(gradebook.grade_range(75, 85)).to eq([student2, student3])
+    expect(gradebook.grade_range(75, 85)).to eq([student2, student3, student4])
     expect(gradebook.grade_range(86, 100)).to eq([student1])
-    expect(gradebook.grade_range(0, 74)).to eq([student4])
+    expect(gradebook.grade_range(0, 74)).to eq([])
   end
 end
