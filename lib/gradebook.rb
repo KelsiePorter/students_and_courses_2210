@@ -29,4 +29,17 @@ class Gradebook
     students_below_80
   end
 
+  def all_grades 
+    all_grades = all_students.map do |student|
+      student.grade
+    end
+  end
+
+  def grade_range(lower, upper)
+    grade_range = all_students.select do |student|
+      student.grade.between?(lower, upper) 
+    end
+    grade_range
+  end
+
 end
