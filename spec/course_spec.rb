@@ -9,7 +9,7 @@ RSpec.describe Course do
     expect(course.capacity).to eq(2)
   end
 
-  it 'course can have students enroll' do 
+  it 'course has no students enrolled by default' do 
     course = Course.new("Calculus", 2)
 
     expect(course.students).to eq([])
@@ -23,6 +23,9 @@ RSpec.describe Course do
 
     course.enroll(student1) 
     course.enroll(student2)
+
+    expect(course.capacity).to eq(2)
+    expect(course.students.size).to eq(2)
 
     expect(course.students).to eq([student1, student2])
     expect(course.full?).to be true
